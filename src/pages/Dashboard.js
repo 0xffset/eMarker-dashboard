@@ -1,23 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Link
+} from "@material-ui/core";
+import {
+  Menu as MenuIcon,
+  NotificationsNone as NotificationsIcon,
+ 
+} from "@material-ui/icons";
+import PersonIcon from '@material-ui/icons/Person';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
@@ -115,11 +122,34 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  profileMenu: {
+    minWidth: 265,
+  },
+  profileMenuUser: {
+    display: "flex",
+    flexDirection: "column",
+    padding: theme.spacing(2),
+  },
+  profileMenuItem: {
+    color: theme.palette.text.hint,
+  },
+  profileMenuIcon: {
+    marginRight: theme.spacing(2),
+    color: theme.palette.text.hint,
+  },
+  profileMenuLink: {
+    fontSize: 16,
+    textDecoration: "none",
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
 }));
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -150,6 +180,17 @@ export default function Dashboard() {
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          <IconButton color="inherit">
+            <Badge  badgeContent={1} color="secondary">
+              <MailOutlineIcon />
+            </Badge>
+          </IconButton>
+          <IconButton color="inherit">
+            <Badge  color="secondary">
+              <PersonIcon />
+            </Badge>
+          </IconButton>
+          
         </Toolbar>
       </AppBar>
       <Drawer
