@@ -6,6 +6,8 @@ const compress = require('compression')
 const cors = require('cors') 
 const helmet = require('helmet') 
 
+//routers
+const authRouter = require('./routers/auth.router')
 const app = express()
 
 //comment out before building for production
@@ -21,6 +23,8 @@ app.use(helmet())
 app.use(cors())
 
 
+//routers
+app.use('/', authRouter)
 
 
 // Catch unauthorised errors

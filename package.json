@@ -17,11 +17,14 @@
     "concurrently": "^5.2.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "helmet": "^3.23.3",
+    "jsonwebtoken": "^8.5.1",
     "material-table": "^1.65.0",
     "material-ui-icons": "^1.0.0-beta.36",
+    "mongodb": "^3.5.9",
     "mongoose": "^5.9.23",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
@@ -39,9 +42,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": "react-app"
   },
+  
   "browserslist": {
     "production": [
       ">0.2%",
@@ -53,5 +58,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+
   }
 }

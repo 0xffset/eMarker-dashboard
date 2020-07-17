@@ -1,13 +1,23 @@
 import React from 'react'
-import {Route, Switch} from 'react-router-dom'
+import {Route, BrowserRouter, Redirect} from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
-
+import Signin from './pages/Signin'
+import UserList from './pages/User'
+import auth from './components/auth/auth-helper'
 const MainRouter = () => {
-    return (<div>
+    return (
+    <div>
         
-        <Switch>
-          <Route exact path="/" component={Dashboard}/>
-        </Switch>
+        <BrowserRouter>
+        <Route path='/' render={() => (
+            auth.isAuthenticated() ? ( <Redirect to='/dashboard'/> ) :
+             ( <Route path='/' exact component={Signin}/> )
+             
+          )} />
+          <Route exact path="/dashboard" component={Dashboard}/>
+          <Route exact path="/users" component={UserList}/>
+        </BrowserRouter>
+        
       </div>)
   }
 

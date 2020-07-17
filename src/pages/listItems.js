@@ -10,15 +10,19 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import SettingsIcon from '@material-ui/icons/Settings';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import {Link} from 'react-router-dom';
 
 export const mainListItems = (
+  
   <div>
+    <Link to="/dashboard" style={{textDecoration: 'none', color: 'black'}}>
     <ListItem button>
       <ListItemIcon>
-        <DashboardIcon />
+        <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
+    </Link>
     <ListItem button>
       <ListItemIcon>
         <ShoppingCartIcon />
@@ -51,12 +55,14 @@ export const secondaryListItems = (
   <div>
     <ListSubheader inset>Settings</ListSubheader>
     
+    <Link to="/users" style={{textDecoration: 'none', color: 'black'}}>
     <ListItem button>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Users" />
     </ListItem>
+    </Link>
     
     <ListItem button>
       <ListItemIcon>
