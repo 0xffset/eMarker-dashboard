@@ -8,6 +8,7 @@ const helmet = require('helmet')
 
 //routers
 const authRouter = require('./routers/auth.router')
+const userRouter = require('./routers/user.router')
 const app = express()
 
 //comment out before building for production
@@ -25,6 +26,8 @@ app.use(cors())
 
 //routers
 app.use('/', authRouter)
+app.use('/', userRouter)
+
 
 
 // Catch unauthorised errors
