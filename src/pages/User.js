@@ -12,6 +12,9 @@ import Grid from '@material-ui/core/Grid';
 import PanelLeft from './Drawer';
 import Title from './Title';
 
+
+//Components 
+import UserLists from '../components/users/user'
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
   return { id, date, name, shipTo, paymentMethod, amount };
@@ -72,17 +75,9 @@ export default function UserList() {
             <TableCell  style={{color: 'black', fontWeight: 'bold'}} align="right">Status</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+       
+        <UserLists/>
+       
       </Table>
     
       </Container>

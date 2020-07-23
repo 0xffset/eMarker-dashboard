@@ -2,7 +2,7 @@ const User = require('./../models/user.model')
 
 const list  = async(req, res) => {
     try {
-        let listUsers = await User.find().select("name email type_user");
+        let listUsers = await User.find().select("name email type_user created");
         return  res.json(listUsers)
     }
     catch (err) {

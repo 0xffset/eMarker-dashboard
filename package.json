@@ -24,12 +24,14 @@
     "jsonwebtoken": "^8.5.1",
     "material-table": "^1.65.0",
     "material-ui-icons": "^1.0.0-beta.36",
+    "moment": "^2.27.0",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.23",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
+    "react-moment": "^0.9.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "recharts": "^1.8.5"
@@ -46,7 +48,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  
   "browserslist": {
     "production": [
       ">0.2%",
@@ -58,6 +59,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-
   }
 }
