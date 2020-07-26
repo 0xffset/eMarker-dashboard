@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,13 +7,22 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/cgit re/Grid';
+import FIleUpload from '@material-ui/icons/AddPhotoAlternate'
+import {
 
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField
+} from '@material-ui/core'
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import PanelLeft from './Drawer';
 import Title from './Title';
 
-
-//Components 
+//Userlist 
 import UserLists from '../components/users/user'
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -29,6 +38,9 @@ const rows = [
 ];
 
 
+
+
+
 const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
@@ -39,6 +51,18 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
     overflow: 'auto',
   },
+     textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200
+    },
+     input: {
+    display: 'none'
+  },
+  filename:{
+    marginLeft:'10px'
+  },
+
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
@@ -48,7 +72,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+ 
+
 export default function UserList() {
+ //States to add new user dialog
+  const [open, setOpen] = useState(false)
+ // Types of user
+  const options = ["admin", "seller", "manager"]
+  // Values of Autocompleme
+  const [value, setValue] = useState(options[0])
+  // Values to save it. 
+  const [values, setValues] = useState({
+    name: '',
+    email: '',
+    image: '',
+    redirect: false,
+    error: ''
+  })
+  // function to handler event changes to save it. 
+  const handleChangge = name => event => {
+     const value = name === 'image' ? event.target.files[0] : event.target.value
+     setValues({...values, [name]: value})
+  }
+  }
+
+
+  const [inputValue, setInputValue] = useState('')
+  // Open Add new user dialog
+  const handleClickAddNewUser = () => {
+    setOpen(true)
+  }
+ // Close Add new user dialog
+  const handleCloseDialog = () => {
+    setOpen(false)
+  }
+
   const classes = useStyles();
   return (
       <>
@@ -62,7 +120,7 @@ export default function UserList() {
   direction="row"
   justify="flex-end"
   alignItems="flex-end">
-     <Button  variant="contained" color="primary">Add new user</Button>
+     <Button onClick={() => handleClickAddNewUser()}  variant="contained" color="primary">Add new user</Button>
     </Grid>
     <Title>List of users</Title>
       <Table size="medium">
@@ -82,6 +140,55 @@ export default function UserList() {
     
       </Container>
     </main>
+{/* Start - Dialog - Add new User*/}
+      <Dialog
+        open={open}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Add new User"}</DialogTitle>
+        <DialogContent>
+              <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+          <label htmlFor="icon-button-file">
+            <Button variant="contained" color="primary" component="span">
+              Upload Logo
+              <FIleUpload/>
+            </Button>
+          </label> <span className={classes.filename}>{values.image ? values.image.name : ''}</span><br/>
+
+            <TextField id="name" type="text" label="Name"  className={classes.textField} variant="outlined"  margin="normal" required/> 
+            <TextField id="email" type="text" label="Email"  className={classes.textField} variant="outlined"  margin="normal" required/> 
+              <div>
+ 
+      <br />
+      <Autocomplete
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+        inputValue={inputValue}
+        onInputChange={(event, newInputValue) => {
+          setInputValue(newInputValue);
+        }}
+        id="controllable-states-demo"
+        options={options}
+        style={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Type user" variant="outlined" />}
+      />
+    </div>
+   
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Close
+          </Button>
+          <Button onClick={handleCloseDialog} color="primary" autoFocus>
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+{/* End - Dialog - Add new User*/}
+
     </div>
     </>
     

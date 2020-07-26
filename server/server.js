@@ -12,8 +12,6 @@ mongoose.connection.on('error', (err, client) => {
   }
 })
 
-
-
 const server = app.listen(config.port, (err) => {
   if (err) {
     console.log(err)
