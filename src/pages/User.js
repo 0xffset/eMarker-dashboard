@@ -111,7 +111,7 @@ export default function UserList() {
         name: values.name || undefined,
         password: values.password || undefined,
         email: values.email || undefined,
-        type_user: 'seller'
+        type_user: values.type_user || undefined
 }
 
 const Message = (message, type) => {
@@ -139,7 +139,6 @@ if (type === "success") {
     
     create(user)
       .then((data) => {
-        console.log(data)
         if (data.error) {
 
           setValues({...values, error: data.error})
@@ -165,9 +164,6 @@ if (type === "success") {
     setOpen(false)
   }
 
-  
-
-
   const classes = useStyles();
   const {redirect} = values
 
@@ -189,6 +185,7 @@ if (type === "success") {
       <Table stickyHeader size="medium">
         <TableHead >
           <TableRow >
+
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Name</TableCell>
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Email</TableCell>
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Date Created</TableCell>
@@ -211,37 +208,41 @@ if (type === "success") {
       >
         <DialogTitle id="alert-dialog-title">{"Add new user"}</DialogTitle>
         <DialogContent>
-          <label htmlFor="icon-button-file">
-            <Button variant="contained" color="primary" component="span">
-              Upload User Image
-              <FIleUpload/>
-            </Button>
-              <input onChange={handleChange('image')}  accept="image/*" className={classes.input} id="icon-button-file" type="file" />
-
-          </label> <span className={classes.filename}>{values.image ? values.image.name : ''}</span><br/>
-
-            <TextField onChange={handleChange('name')}  id="name" type="text" label="Name"  className={classes.textField} variant="outlined"  margin="normal" required/> 
+         <Grid
+  container
+  direction="row"
+  justify="left"
+  alignItems="center"
+>
+            <TextField onChange={handleChange('name')}  id="name" type="text" label="Name"  className={classes.textField} variant="outlined"  margin="normal" styles={{width: '300px'}} required/> 
             <TextField onChange={handleChange('email')} id="email" type="text" label="Email"  className={classes.textField} variant="outlined"  margin="normal" required/> 
+           </Grid>
+           <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+           >
             <TextField onChange={handleChange('password')} id="password" type="password" label="Password"  className={classes.textField} variant="outlined"  margin="normal" required/> 
-              <div>
- 
-      <br />
-      <Autocomplete
+           <Autocomplete
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
-          handleChange('type_user')
+        
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
+          setValues({...values, ['type_user']: newInputValue})  
+
         }}
         id="controllable-states-demo"
         options={options}
-        style={{ width: 300 }}
+        style={{ width: 200 }}
         renderInput={(params) => <TextField {...params} label="Type user" variant="outlined" />}
       />
-    </div>
+      </Grid>
+
    
         </DialogContent>
         <DialogActions>
