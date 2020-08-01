@@ -53,7 +53,7 @@ const signout = (req, res) => {
 
 const requiredSign = expressJWT({
     secret: config.jwtSecret,
-    algorithms: ['RS256'],
+    algorithms: ['HS256'],
     userProperty: 'auth'
 })
 

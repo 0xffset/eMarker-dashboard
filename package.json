@@ -21,6 +21,8 @@
     "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
+    "formidable": "^1.2.2",
+    "formidable-serverless": "^1.0.3",
     "helmet": "^3.23.3",
     "jsonwebtoken": "^8.5.1",
     "material-table": "^1.65.0",
@@ -39,14 +41,15 @@
     "recharts": "^1.8.5"
   },
   "scripts": {
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm start\"",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start\"",
     "server": "cd server && nodemon server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001",
+  
+  "proxy": "http://localhost:3001/",
   "eslintConfig": {
     "extends": "react-app"
   },

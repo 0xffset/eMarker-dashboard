@@ -6,7 +6,6 @@ import UserList from './pages/User'
 import auth from './components/auth/auth-helper'
 
 // Components to testing
-import addUserDialog from'./components/dialogs/addUserDialog'
 const MainRouter = () => {
     return (
     <div>
@@ -19,7 +18,6 @@ const MainRouter = () => {
           )} />
           <Route exact path="/dashboard" component={Dashboard}/>
           <Route exact path="/users" component={UserList}/>
-          <Route  path="/test" component={addUserDialog}/>
         </BrowserRouter>
         
       </div>)

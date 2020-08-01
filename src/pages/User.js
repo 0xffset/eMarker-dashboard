@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Redirect} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,8 +8,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/cgit re/Grid';
+import Grid from '@material-ui/core/Grid';
 import FIleUpload from '@material-ui/icons/AddPhotoAlternate'
+import auth from '../components/auth/auth-helper.js'
+import { useSnackbar } from 'notistack';
+import {create} from '../components/users/user-api.js'
 import {
 
   Dialog,
@@ -85,18 +89,71 @@ export default function UserList() {
   const [values, setValues] = useState({
     name: '',
     email: '',
+    password: '',
+    type_user: '',
     image: '',
     redirect: false,
     error: ''
   })
+ const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const jwt = auth.isAuthenticated()
+
   // function to handler event changes to save it. 
-  const handleChangge = name => event => {
+  const handleChange = name => event => {
      const value = name === 'image' ? event.target.files[0] : event.target.value
      setValues({...values, [name]: value})
   }
-  }
+  const clickSubmit = () => {
 
+      const user = {
+        name: values.name || undefined,
+        password: values.password || undefined,
+        email: values.email || undefined,
+        type_user: 'seller'
+}
 
+const Message = (message, type) => {
+     if (type === "error") {
+        enqueueSnackbar(message, {
+          variant: 'error',
+          anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'center',
+    },
+  });
+}
+
+if (type === "success") {
+      enqueueSnackbar(message, {
+          variant: 'success',
+          anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+    },
+});
+}
+}
+   
+    
+    create(user)
+      .then((data) => {
+        console.log(data)
+        if (data.error) {
+
+          setValues({...values, error: data.error})
+          setOpen(true)
+          Message(data.error, "error")
+        } else {
+    
+          Message(data.message, "success")
+           setOpen(false)
+           setValues({...values, error: '', redirect: true})
+        }
+      }) 
+
+}
+  
   const [inputValue, setInputValue] = useState('')
   // Open Add new user dialog
   const handleClickAddNewUser = () => {
@@ -107,9 +164,14 @@ export default function UserList() {
     setOpen(false)
   }
 
+  
+
+
   const classes = useStyles();
+  const {redirect} = values
+
   return (
-      <>
+    
     <div className={classes.root}>
    
     <PanelLeft name="Users"/>
@@ -123,14 +185,14 @@ export default function UserList() {
      <Button onClick={() => handleClickAddNewUser()}  variant="contained" color="primary">Add new user</Button>
     </Grid>
     <Title>List of users</Title>
-      <Table size="medium">
+      <Table stickyHeader size="medium">
         <TableHead >
           <TableRow >
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Name</TableCell>
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Email</TableCell>
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Date Created</TableCell>
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Type user</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}} align="right">Status</TableCell>
+            <TableCell  style={{color: 'black', fontWeight: 'bold'}} >Status</TableCell>
           </TableRow>
         </TableHead>
        
@@ -140,24 +202,26 @@ export default function UserList() {
     
       </Container>
     </main>
-{/* Start - Dialog - Add new User*/}
+ {/* Start - Dialog - Add new User*/}
       <Dialog
         open={open}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Add new User"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Add new user"}</DialogTitle>
         <DialogContent>
-              <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
           <label htmlFor="icon-button-file">
             <Button variant="contained" color="primary" component="span">
-              Upload Logo
+              Upload User Image
               <FIleUpload/>
             </Button>
+              <input onChange={handleChange('image')}  accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+
           </label> <span className={classes.filename}>{values.image ? values.image.name : ''}</span><br/>
 
-            <TextField id="name" type="text" label="Name"  className={classes.textField} variant="outlined"  margin="normal" required/> 
-            <TextField id="email" type="text" label="Email"  className={classes.textField} variant="outlined"  margin="normal" required/> 
+            <TextField onChange={handleChange('name')}  id="name" type="text" label="Name"  className={classes.textField} variant="outlined"  margin="normal" required/> 
+            <TextField onChange={handleChange('email')} id="email" type="text" label="Email"  className={classes.textField} variant="outlined"  margin="normal" required/> 
+            <TextField onChange={handleChange('password')} id="password" type="password" label="Password"  className={classes.textField} variant="outlined"  margin="normal" required/> 
               <div>
  
       <br />
@@ -165,6 +229,7 @@ export default function UserList() {
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
+          handleChange('type_user')
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
@@ -182,17 +247,14 @@ export default function UserList() {
           <Button onClick={handleCloseDialog} color="primary">
             Close
           </Button>
-          <Button onClick={handleCloseDialog} color="primary" autoFocus>
+          <Button onClick={clickSubmit} color="primary" autoFocus>
             Save
           </Button>
         </DialogActions>
       </Dialog>
-{/* End - Dialog - Add new User*/}
+ {/* End - Dialog - Add new User*/}
 
     </div>
-    </>
     
-    
-    
-  );
+    );
 }
