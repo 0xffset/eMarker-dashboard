@@ -15,10 +15,9 @@ const list  = async(req, res) => {
     }
     
 }
-    
+
 const create = async(req, res) => {
-           const user = new User(req.body)
-            
+        const user = new User(req.body)
         try {
              
             let response = await user.save()
@@ -32,18 +31,41 @@ const create = async(req, res) => {
             })
         }
    
-  }
+}
+
+const remove = async(req, res) => {
+        
+    try {
+        let user = req.profile
+        let delUser = await user.remove()
+        delUser.hashed_password = undefined
+        delUser.salt = undefined
+        res.json({
+            user: delUser,
+            message: `${delUser.name} was deleted successfully`
+        })            
+        }
+    catch (err) {
+        return res.status(400).json({
+            err: err
+        })
+    }
+}
 
 const userById = async(req, res, next, id) => {
+
     try {
         let user = await User.findById(id)
+
         if(!user) {
             return res.status('400').json({
                 error: "User not found"
             })
+        } 
             req.profile = user
-            next()
-            }
+            next()       
+
+            
 
     } catch(err) {
         return res.status('400').json({
@@ -53,6 +75,7 @@ const userById = async(req, res, next, id) => {
 }
 
 module.exports = {
+    remove,
     list,
     userById,
     create

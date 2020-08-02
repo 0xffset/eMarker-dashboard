@@ -25,7 +25,7 @@ import {
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import PanelLeft from './Drawer';
 import Title from './Title';
-
+import Icon from '@material-ui/core/Icon';
 
 //Userlist 
 import UserLists from '../components/users/user'
@@ -185,7 +185,7 @@ if (type === "success") {
       <Table stickyHeader size="medium">
         <TableHead >
           <TableRow >
-
+            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Actions</TableCell>
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Name</TableCell>
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Email</TableCell>
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Date Created</TableCell>

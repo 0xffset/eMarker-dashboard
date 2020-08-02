@@ -15,6 +15,22 @@ const userlist = async() => {
     }
 }
 
+const remove = async(id) => {
+    try {
+        let response = await fetch('/api/users/'+id, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        return await response.json()
+    }
+    catch (err) {
+        console.error(err)
+    }
+}
+
 const create = async(user) => {
     try {
         let response = await fetch('/api/users/', {
