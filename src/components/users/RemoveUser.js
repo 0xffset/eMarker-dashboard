@@ -8,6 +8,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { useSnackbar } from 'notistack';
+import {remove} from './user-api.js'
 
 import {
  
@@ -23,12 +25,53 @@ const useStyles = makeStyles((theme) => ({
 }));
  const RemoveUser = (props) => {
 	const [open, setOpen] = useState(false)
+	const [values, setValues] = useState({
+		error: '',
+		message: ''
+	})
+	const { enqueueSnackbar } = useSnackbar();
+
 	
 	const handleClose = () => {
 		setOpen(false)
 	}
 	const handleOpenDialog = () => {
 		setOpen(true)
+	}
+	const Message = (message, type) => {
+     if (type === "error") {
+        enqueueSnackbar(message, {
+          variant: 'error',
+          anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'center',
+    },
+  });
+}
+
+if (type === "success") {
+      enqueueSnackbar(message, {
+          variant: 'success',
+          anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+    },
+});
+}
+}
+   
+
+	const clickDelete = () => {
+		remove(props.id)
+			.then((data) => {
+				if (data.error)
+				{
+					Message(data.error, "error")
+				} else {
+					Message(data.message, "success")
+					setOpen(false)
+				}
+			})
 	}
 const classes = useStyles();
 
@@ -54,7 +97,7 @@ const classes = useStyles();
           <Button onClick={handleClose} color="primary">
             Cancel 
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={clickDelete} color="primary" autoFocus>
             Accept 
           </Button>
         </DialogActions>
