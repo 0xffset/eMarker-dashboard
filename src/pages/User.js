@@ -2,14 +2,12 @@ import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import FIleUpload from '@material-ui/icons/AddPhotoAlternate'
 import auth from '../components/auth/auth-helper.js'
 import { useSnackbar } from 'notistack';
 import {create} from '../components/users/user-api.js'
@@ -18,31 +16,16 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   TextField
 } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import PanelLeft from './Drawer';
 import Title from './Title';
-import Icon from '@material-ui/core/Icon';
 
 //Userlist 
 import UserLists from '../components/users/user'
 // Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-const rows = [
-  createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-  createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-  createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-];
-
-
 
 
 
@@ -96,9 +79,8 @@ export default function UserList() {
     redirect: false,
     error: ''
   })
- const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+ const { enqueueSnackbar } = useSnackbar();
 
-  const jwt = auth.isAuthenticated()
 
   // function to handler event changes to save it. 
   const handleChange = name => event => {
@@ -165,7 +147,6 @@ if (type === "success") {
   }
 
   const classes = useStyles();
-  const {redirect} = values
 
   return (
     

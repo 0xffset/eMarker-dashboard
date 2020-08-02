@@ -10,7 +10,6 @@ import {
     IconButton
 
 } from '@material-ui/core'
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import RemoveUser from '../../components/users/RemoveUser'
 const useStyles = makeStyles((theme) => ({
@@ -33,10 +32,7 @@ const useStyles = makeStyles((theme) => ({
 export default function UserLists(props) {
    
     const [users, setUsers] = useState([]);
-    const [open, setOpen] = useState(false)
-    const handleOpen = (id) => {
-      setOpen(true)
-    }
+    
     useEffect(() => {
         const abortController = new AbortController()
         const signal = abortController.signal
@@ -59,7 +55,7 @@ const classes = useStyles();
             <TableCell>{user.email}</TableCell>
             <TableCell><Moment format="yyyy/MM/DD">{user.created}</Moment></TableCell>
             <TableCell>{user.type_user}</TableCell>
-           <TableCell> {user.status == "Enable" ? <Chip color="primary"  label={user.status}/>  : <Chip color="secondary"  label={user.status}/> } 
+           <TableCell> {user.status === "Enable" ? <Chip color="primary"  label={user.status}/>  : <Chip color="secondary"  label={user.status}/> } 
      
     </TableCell>
           </TableRow>

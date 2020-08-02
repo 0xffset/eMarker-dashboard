@@ -51,5 +51,6 @@ const create = async(user) => {
 
 export {
     userlist,
-    create
+    create,
+    remove
 }
