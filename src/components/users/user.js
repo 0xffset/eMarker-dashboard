@@ -10,8 +10,8 @@ import {
     IconButton
 
 } from '@material-ui/core'
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import RemoveUser from '../../components/users/RemoveUser'
+import UpdateUser from '../../components/users/UpdateUser'
 const useStyles = makeStyles((theme) => ({
 
     TableCellDisable: {
@@ -33,14 +33,14 @@ export default function UserLists(props) {
    
     const [users, setUsers] = useState([]);
     
-    useEffect(() => {
+  useEffect(() => {
         const abortController = new AbortController()
         const signal = abortController.signal
         userlist({},signal)
             .then((res) => {
                 setUsers(res)
             })
-    }, []);
+    });
 const classes = useStyles();
     return (
         <TableBody>
@@ -48,9 +48,8 @@ const classes = useStyles();
           <TableRow key={user._id}>
           <TableCell>
           <RemoveUser id={user._id} name={user.name}/>
-          <IconButton  arial-label="update" className={classes.margin}>
-              <EditOutlinedIcon/>
-          </IconButton></TableCell>
+          <UpdateUser id={user._id} name={user.name} email={user.email} typeUser={user.type_user} status={user.status}/>
+          </TableCell>
             <TableCell>{user.name}</TableCell>
             <TableCell>{user.email}</TableCell>
             <TableCell><Moment format="yyyy/MM/DD">{user.created}</Moment></TableCell>
