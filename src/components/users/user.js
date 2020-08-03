@@ -1,33 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Moment from 'react-moment'
-import { makeStyles } from '@material-ui/core/styles'
 import { userlist } from './user-api'
 import {
     TableBody,
     TableCell,
     TableRow,
     Chip,
-    IconButton
+    
 
 } from '@material-ui/core'
 import RemoveUser from '../../components/users/RemoveUser'
 import UpdateUser from '../../components/users/UpdateUser'
-const useStyles = makeStyles((theme) => ({
-
-    TableCellDisable: {
-        background: "#aa2e25",
-        borderRadius: "25px"
-    },
-    TableCellEnable: {
-        background: "#357a38",
-        borderRadius: "25px"
-        
-    },
-    margin: {
-        margin: theme.spacing(1),
-    },
-}));
-
 
 export default function UserLists(props) {
    
@@ -41,7 +24,6 @@ export default function UserLists(props) {
                 setUsers(res)
             })
     });
-const classes = useStyles();
     return (
         <TableBody>
         {users.map((user) => (

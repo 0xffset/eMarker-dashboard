@@ -31,6 +31,23 @@ const remove = async(id) => {
     }
 }
 
+const update = async(id, user) => {
+    try {
+        let response = await fetch('/api/users/'+id, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        return await response.json()
+    }
+    catch (err) {
+        console.error(err)
+    }
+}
+
 const create = async(user) => {
     try {
         let response = await fetch('/api/users/', {
@@ -50,6 +67,7 @@ const create = async(user) => {
 }
 
 export {
+    update,
     userlist,
     create,
     remove

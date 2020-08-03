@@ -2,6 +2,7 @@ const User = require('./../models/user.model')
 const getErrorMessage = require('../helpers/dbErrorParser.js')
 const formidable = require('formidable-serverless')
 const fs = require('fs')
+const extend = require('lodash/extend')
 
 const list  = async(req, res) => {
     try {
@@ -33,6 +34,26 @@ const create = async(req, res) => {
    
 }
 
+const update = async(req, res) => {
+    try {
+        let user = req.profile
+        user = extend(user, req.body)
+
+        user.updated = Date.now()
+        await user.save()
+        user.hashed_password = undefined
+        user.salt = undefined
+        res.json({
+            user: user,
+            message: "The user was updated successfully"
+        })
+    }
+    catch (err) {
+        return res.status(400).json({
+            error: err
+        })
+    }
+}
 const remove = async(req, res) => {
         
     try {
@@ -75,6 +96,7 @@ const userById = async(req, res, next, id) => {
 }
 
 module.exports = {
+    update,
     remove,
     list,
     userById,

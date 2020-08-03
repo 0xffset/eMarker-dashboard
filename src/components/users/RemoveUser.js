@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -19,16 +19,13 @@ import {
 
 const useStyles = makeStyles((theme) => ({
 	margin: {
-        margin: theme.spacing(1),
+        margin: "-15px",
     },
    
 }));
  const RemoveUser = (props) => {
 	const [open, setOpen] = useState(false)
-	const [values, setValues] = useState({
-		error: '',
-		message: ''
-	})
+
 	const { enqueueSnackbar } = useSnackbar();
 
 	

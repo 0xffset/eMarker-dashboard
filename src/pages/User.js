@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Redirect} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,7 +7,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import auth from '../components/auth/auth-helper.js'
 import { useSnackbar } from 'notistack';
 import {create} from '../components/users/user-api.js'
 import {
@@ -163,7 +161,7 @@ if (type === "success") {
      <Button onClick={() => handleClickAddNewUser()}  variant="contained" color="primary">Add new user</Button>
     </Grid>
     <Title>List of users</Title>
-      <Table stickyHeader size="medium">
+      <Table>
         <TableHead >
           <TableRow >
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Actions</TableCell>

@@ -1,29 +1,16 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import { useSnackbar } from 'notistack';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Grid from '@material-ui/core/Grid';
-import {
-
-
-
-  TextField
-} from '@material-ui/core'
-
-import {
- 
-    IconButton
-
-} from '@material-ui/core'
+import {TextField,  IconButton} from '@material-ui/core'
+import {update} from './user-api.js'
 
 const useStyles = makeStyles((theme) => ({
 	margin: {
@@ -49,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 	}
    const array = [props.typeUser, "admin", "seller", "manager"]
    const options = [...new Set(array)]
-  const [value, setValue] = useState(options[0])
+  const [valueType, setValueType] = useState(options[0])
        
   const arrStatus = [props.status, "Enable", "Disable"]
   const optionsStatus = [...new Set(arrStatus)]
@@ -71,8 +58,7 @@ const useStyles = makeStyles((theme) => ({
 
   // function to handler event changes to save it. 
   const handleChange = name => event => {
-     const value = name === 'image' ? event.target.files[0] : event.target.value
-     setValues({...values, [name]: value})
+     setValues({...values, [name]: event.target.value})
   }
 	const Message = (message, type) => {
      if (type === "error") {
@@ -98,6 +84,22 @@ if (type === "success") {
    
 
 	const clickUpdate = () => {
+    const user = {
+      name: values.name || undefined,
+      email: values.email || undefined,
+      type_user: values.type_user || undefined,
+      status: values.status || undefined
+    }
+    update(props.id, user)
+      .then((data) => {
+        if(data.error)
+        {
+          Message(data.error, "error")
+        } else {
+          setOpen(false)
+          Message(data.message, "success")
+        }
+      })
 	
 	}
 const classes = useStyles();
@@ -121,7 +123,7 @@ const classes = useStyles();
   justify="left"
   alignItems="center"
 >
-            <TextField onChange={handleChange('name')}  id="name" value={props.name} type="text" label="Name"  className={classes.textField} variant="outlined"  margin="normal" styles={{width: '300px'}} required/> 
+            <TextField onChange={handleChange('name')} defaultValue={props.name}  id="name"  type="text" label="Name"  className={classes.textField} variant="outlined"  margin="normal" styles={{width: '300px'}} required/> 
             <TextField onChange={handleChange('email')} id="email" value={props.email} type="text" label="Email"  className={classes.textField} variant="outlined"  margin="normal" required/> 
            </Grid>
            <Grid
@@ -131,9 +133,9 @@ const classes = useStyles();
             alignItems="center"
            >
            <Autocomplete
-          value={value}
+          value={valueType}
           onChange={(event, newValue) => {
-           setValue(newValue);
+           setValueType(newValue);
         
          }}
           inputValue={inputValue}
@@ -152,12 +154,13 @@ const classes = useStyles();
            value={props.status}
            onChange={(event, newValueStatus) => {
            setStatus(newValueStatus);
+           setValues({...values, ['status']: newValueStatus})  
+
         
          }}
            inputValue={inputValueStatus}
            onInputChange={(event, newInputValueStatus) => {
            setInputValueStatus(newInputValueStatus);
-           setStatus({...values, ['status']: newInputValueStatus})  
 
         }}
            id="controllable-states-demo"
