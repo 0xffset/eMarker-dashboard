@@ -34,12 +34,14 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Customers" />
     </ListItem>
+   <Link to="/product" style={{textDecoration: 'none', color: 'black'}}>
     <ListItem button>
       <ListItemIcon>
         <FastfoodIcon />
       </ListItemIcon>
       <ListItemText primary="Products" />
     </ListItem>
+   </Link>
     <ListItem button>
       <ListItemIcon>
         <BarChartIcon />

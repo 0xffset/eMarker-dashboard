@@ -17,10 +17,13 @@ import {TextField,
         CardActions,
         CardContent,
         CardMedia,
-        Button} from '@material-ui/core'
+        Button,
+        Container} from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import MaskedInput from 'react-text-mask';
 import NumberFormat from 'react-number-format';
+import PanelLeft from './Drawer';
+
 import CloudUploadOutlinedIcon from '@material-ui/icons/CloudUploadOutlined';
 
 const TabPanel = (props) => {
@@ -58,14 +61,24 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
+    display: 'flex',
   },
   card: {
        width: 204.8,
        height: 204.8
      },
+ content: {
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  appBarSpacer: theme.mixins.toolbar,
+
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+     
 }));
 
 const ActionProducts =()=> {
@@ -101,8 +114,14 @@ const ActionProducts =()=> {
   }
 
   return (
+     
+
     <div className={classes.root}>
-      <AppBar position="static" color="default">
+     <PanelLeft name="Products"/>
+     <main className={classes.content}>
+      <div className={classes.appBarSpacer} />
+     <Container maxWidth="lg" className={classes.container}>
+<AppBar position="static" color="default">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -110,6 +129,7 @@ const ActionProducts =()=> {
           textColor="primary"
           variant="scrollable"
           scrollButtons="auto"
+          
           aria-label="scrollable auto tabs example"
         >
           <Tab label="Basic Info" {...a11yProps(0)} />
@@ -314,7 +334,7 @@ const ActionProducts =()=> {
      <Grid item xs={12}>
           <TextField
         label="Width (cm)"
-        style={{ margin: 8, width: '31.5%' }}
+        style={{ margin: 8, width: '31%' }}
         name="Width"
         margin="normal"
         id="standard-adornment-weight"
@@ -328,7 +348,7 @@ const ActionProducts =()=> {
       />
        <TextField
         label="Height (cm)"
-        style={{ margin: 8, width: '33.1%' }}
+        style={{ margin: 8, width: '33%' }}
         name="Height"
         margin="normal"
         id="standard-adornment-weight"
@@ -342,7 +362,7 @@ const ActionProducts =()=> {
       />
        <TextField
         label="Depth (cm)"
-        style={{ margin: 8, width: '31.5%' }}
+        style={{ margin: 8, width: '31%' }}
         name="Depth"
         margin="normal"
         id="standard-adornment-weight"
@@ -385,7 +405,10 @@ const ActionProducts =()=> {
     </Grid>
         </Grid>
       </TabPanel>
-    </div>
+
+     </Container>
+     </main>
+      </div>
   );
 }
 
