@@ -4,8 +4,8 @@ import Dashboard from './pages/Dashboard'
 import Signin from './pages/Signin'
 import UserList from './pages/User'
 import auth from './components/auth/auth-helper'
-import ActionProducts from'./pages/Product.js'
-
+import ActionProducts from'./components/product/NewProduct.js'
+import Product from './pages/Product.js'
 // Components to testing
 const MainRouter = () => {
     return (
@@ -19,7 +19,8 @@ const MainRouter = () => {
           )} />
           <Route exact path="/dashboard" component={Dashboard}/>
           <Route exact path="/users" component={UserList}/>
-          <Route exact path="/product" component={ActionProducts}/>
+          <Route exact path="/product" component={Product}/>
+          <Route exact path="/product/new" component={ActionProducts}/>
 
         </BrowserRouter>
         
