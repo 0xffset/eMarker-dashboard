@@ -32,7 +32,7 @@ const create = (req, res, next) => {
 }
 const list  = async(req, res) => {
     try {
-        let listProducts = await Product.find().select("name categories price quantity status");
+        let listProducts = await Product.find().select("name image categories price quantity status");
         return  res.json(listProducts)
     }
     catch (err) {

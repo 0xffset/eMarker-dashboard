@@ -6,6 +6,8 @@ import {
     TableRow,
     Chip
 } from '@material-ui/core'
+import arrBufferToBase64 from '../../components/helpers/buffeToBinary.js'
+
 
 
 export default function ProductLists(props) {
@@ -18,13 +20,14 @@ export default function ProductLists(props) {
         productlist({},signal)
             .then((res) => {
                 setProducts(res)
+
             })
     });
     return (
         <TableBody>
         {products.map((product) => (
           <TableRow key={product._id}>
-          
+          <TableCell><img src={`data:${product.image.contentType};base64,${arrBufferToBase64(product.image.data.data)}`} style={{width: 50, height: 50}} /></TableCell>
             <TableCell>{product.name}</TableCell>
             <TableCell>{product.categories}</TableCell>
             <TableCell>{"$"+product.price}</TableCell>

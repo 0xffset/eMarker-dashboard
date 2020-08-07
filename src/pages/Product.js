@@ -72,6 +72,7 @@ const classes = useStyles();
       <Table>
         <TableHead >
           <TableRow >
+            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>  </TableCell>
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Name</TableCell>
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Category</TableCell>
             <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Price</TableCell>
