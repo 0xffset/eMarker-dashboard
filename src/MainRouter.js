@@ -5,6 +5,7 @@ import Signin from './pages/Signin'
 import UserList from './pages/User'
 import auth from './components/auth/auth-helper'
 import ActionProducts from'./components/product/NewProduct.js'
+import UpdateProduct from './components/product/UpdateProduct.js'
 import Product from './pages/Product.js'
 // Components to testing
 const MainRouter = () => {
@@ -21,6 +22,7 @@ const MainRouter = () => {
           <Route exact path="/users" component={UserList}/>
           <Route exact path="/product" component={Product}/>
           <Route exact path="/product/new" component={ActionProducts}/>
+          <Route exact path="/product/update/:id" component={UpdateProduct}/>
 
         </BrowserRouter>
         
