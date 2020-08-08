@@ -127,7 +127,7 @@ const UpdateProduct =(props)=> {
   useEffect(() => {
   getProductBefore(props.match.params.id)
     .then((res) => {
-      console.log(res.data)
+     
      setValues({
       name: res.data[0]['name'],
       description: res.data[0]['description'],
@@ -140,8 +140,10 @@ const UpdateProduct =(props)=> {
       height: res.data[0]['height'],
       depth: res.data[0]['depth'],
       weight: res.data[0]['weight'],
-      image: res.data[0]['image']
+      image: res.data[0]['image'],
+     
      })
+
   })
 }, [])
   const handleChange = (event, newValue) => {
@@ -216,7 +218,7 @@ if (type === "success") {
      <main className={classes.content}>
       <div className={classes.appBarSpacer} />
      <Container maxWidth="lg" className={classes.container}>
-  
+ 
  
    <Grid container
         
@@ -227,7 +229,7 @@ if (type === "success") {
           <Grid item>
 
             <ButtonBase className={classes.image}>
-              <img className={classes.img} alt="complex" src={values.image ? `data:${values.image.contentType};base64,${arrBufferToBase64(values.image.data.data)}` : "http://react-material.fusetheme.com/assets/images/ecommerce/product-image-placeholder.png"} />
+              <img className={classes.img} alt="img" src={values.image ? `data:${values.image.contentType};base64,${arrBufferToBase64(values.image.data.data)}` : "http://react-material.fusetheme.com/assets/images/ecommerce/product-image-placeholder.png"} />
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
@@ -318,7 +320,7 @@ if (type === "success") {
         onChange={(event, value) => handleCategories(value)}
         options={Caregories}
         getOptionLabel={(option) => option.title}
-        // d efaultValue={[top100Films[13]]}
+        // defaultValue={values.categories ? {"title": values.categories.split(",")} : ['']}
         filterSelectedOptions
         renderInput={(params) => (
           <TextField
@@ -652,6 +654,7 @@ NumberFormatShopping.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
+
 
 const Caregories = [
   { title: 'Arts & Crafs' },
