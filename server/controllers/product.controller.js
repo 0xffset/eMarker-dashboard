@@ -2,7 +2,7 @@ const Product = require('../models/product.model.js')
 const fs = require('fs')
 const formidable = require('formidable')
 const getErrorMessage = require('../helpers/dbErrorParser.js')
-
+const extend = require('lodash/extend')
 const create = (req, res, next) => {
 	let dataForm = new formidable.IncomingForm()
 	dataForm.keepExtensions= true
@@ -40,7 +40,9 @@ const update = (req, res, next) => {
                 error: "Error to load image"
             })
         }
-        let product = new Product(fields)
+        let product = req.product
+        product = extend(product, fields)
+        product.updated = Date.now()
         if(files.image) {
             product.image.data = fs.readFileSync(files.image.path)
             product.image.contentType = files.image.type

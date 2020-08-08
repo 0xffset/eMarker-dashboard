@@ -127,6 +127,7 @@ const UpdateProduct =(props)=> {
   useEffect(() => {
   getProductBefore(props.match.params.id)
     .then((res) => {
+      console.log(res.data)
      setValues({
       name: res.data[0]['name'],
       description: res.data[0]['description'],

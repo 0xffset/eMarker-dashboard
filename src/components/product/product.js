@@ -31,8 +31,8 @@ export default function ProductLists(props) {
         productlist({},signal)
             .then((res) => {
                 setProducts(res)
-
-            })
+                console.log(res)
+              })
     }, []);
   const classes = useStyles();
     return (
@@ -43,8 +43,10 @@ export default function ProductLists(props) {
            <Link to={`/product/update/${product._id}`}><IconButton arial-label="update" className={classes.margin} >
               <EditOutlinedIcon/>
        </IconButton></Link>
-          <TableCell><img src={`data:${product.image.contentType};base64,${arrBufferToBase64(product.image.data.data)}`} style={{width: 50, height: 50}} /></TableCell>
-            <TableCell>{product.name}</TableCell>
+            {product.image ? ( <TableCell><img src={`data:${product.image.contentType};base64,${arrBufferToBase64(product.image.data.data)}`} style={{width: 50, height: 50}} /></TableCell>)
+              : (<TableCell><img src={"http://react-material.fusetheme.com/assets/images/ecommerce/product-image-placeholder.png"} style={{width: 50, height: 50}}/></TableCell>)}
+             <TableCell>{product.name}</TableCell>
+            
             <TableCell>{product.categories}</TableCell>
             <TableCell>{"$"+product.price}</TableCell>
             <TableCell>{product.quantity}</TableCell>
