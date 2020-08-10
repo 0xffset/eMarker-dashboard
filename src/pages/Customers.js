@@ -1,19 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Container from '@material-ui/core/Container';
-import {
-
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  TextField
-} from '@material-ui/core'
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import PanelLeft from './Drawer';
 import Title from './Title';
 import CustomersLists from '../components/customers/customer'

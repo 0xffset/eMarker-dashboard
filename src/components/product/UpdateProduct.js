@@ -145,7 +145,7 @@ const UpdateProduct =(props)=> {
      })
 
   })
-}, [])
+}, [props.match.params.id])
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -237,7 +237,7 @@ if (type === "success") {
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
-                 {values.name == "" ? "--" : values.name} 
+                 {values.name === "" ? "--" : values.name} 
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   {values.sku ? "SKU: " + values.sku : "--" }
