@@ -16,13 +16,14 @@ const list = async(req, res) => {
 					let idProduct = parseOrders[i]['products'][product]['product']
 					let quantity = 	parseOrders[i]['products'][product]['quantity']
 					let status = parseOrders[i]['products'][product]['status']
-					let price = await Product.find({"_id" : idProduct}).limit(5).select("price")
+					let price = await Product.find({"_id" : idProduct}).limit(5).select("price status")
 					let amount = (price[0].price * quantity)
 					arrOrders.push({
 						_id: parseOrders[i]['_id'], // id customer
 						customer_name: parseOrders[i]['customer_name'],
 						customer_email: parseOrders[i]['customer_email'],
 						amount: amount,
+						status: status,
 						payment_id: parseOrders[i]['payment_id'],
 						created_at: parseOrders[i]['created']
 					})

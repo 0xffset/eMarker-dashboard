@@ -41,6 +41,7 @@ export default function Orders() {
             <TableCell>Name</TableCell>
             <TableCell>Email</TableCell>
             <TableCell>Payment Id</TableCell>
+            <TableCell>Status</TableCell>
             <TableCell align="right">Sale Amount</TableCell>
           </TableRow>
         </TableHead>
@@ -51,7 +52,8 @@ export default function Orders() {
               <TableCell>{order.customer_name}</TableCell>
               <TableCell>{order.customer_email}</TableCell>
               <TableCell>{order.payment_id}</TableCell>
-              <TableCell align="right">{order.amount}</TableCell>
+              <TableCell>{order.status}</TableCell>
+              <TableCell align="right">${order.amount}</TableCell>
             </TableRow>
           ))}
         </TableBody>
