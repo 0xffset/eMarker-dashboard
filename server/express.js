@@ -9,6 +9,7 @@ const helmet = require('helmet')
 const authRouter = require('./routers/auth.router')
 const userRouter = require('./routers/user.router')
 const productRouter = require('./routers/product.router')
+const customerRouter = require('./routers/customer.router')
 const app = express()
 
 //comment out before building for production
@@ -28,6 +29,8 @@ app.use(cors())
 app.use('/', authRouter)
 app.use('/', userRouter)
 app.use('/', productRouter)
+app.use('/', customerRouter)
+
 
 
 

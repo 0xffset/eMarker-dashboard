@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import { productlist } from './product-api'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import { makeStyles } from '@material-ui/core/styles'
-
 import {
     TableBody,
     TableCell,
@@ -17,8 +16,6 @@ const useStyles = makeStyles((theme) => ({
   margin: {
         margin: theme.spacing(1),
     },
-   
-   
 }));
 
 export default function ProductLists(props) {
@@ -31,7 +28,6 @@ export default function ProductLists(props) {
         productlist({},signal)
             .then((res) => {
                 setProducts(res)
-                console.log(res)
               })
     }, []);
   const classes = useStyles();

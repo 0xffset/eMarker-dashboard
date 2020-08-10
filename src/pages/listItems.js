@@ -28,12 +28,14 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Orders" />
     </ListItem>
+   <Link to='/customers' style={{textDecoration: 'none', color: 'black'}}>
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Customers" />
     </ListItem>
+   </Link>
    <Link to="/product" style={{textDecoration: 'none', color: 'black'}}>
     <ListItem button>
       <ListItemIcon>
