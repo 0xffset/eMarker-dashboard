@@ -34,7 +34,7 @@ export default function UserLists(props) {
           </TableCell>
             <TableCell>{user.name}</TableCell>
             <TableCell>{user.email}</TableCell>
-            <TableCell><Moment format="yyyy/MM/DD">{user.created}</Moment></TableCell>
+            <TableCell><Moment format="LLL">{user.created}</Moment></TableCell>
             <TableCell>{user.type_user}</TableCell>
            <TableCell> {user.status === "Enable" ? <Chip color="primary"  label={user.status}/>  : <Chip color="secondary"  label={user.status}/> } 
      
