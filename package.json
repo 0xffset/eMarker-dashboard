@@ -51,7 +51,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm install && npm run server && npm start  --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "npm install && npm start  --only=dev --no-shrinkwrap && npm run build"
   },
   "proxy": "http://localhost:3001/",
   "eslintConfig": {
