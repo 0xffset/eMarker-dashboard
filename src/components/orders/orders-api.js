@@ -31,4 +31,22 @@ const totalsales = async() => {
     }
 }
 
-export {recentorders, totalsales} 
+const chart = async() => {
+    try {
+        let response = await fetch('/api/orders/chart', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        return await response.json()
+     } 
+
+    catch(err) {
+        console.error(err)
+    }
+}
+
+
+export {recentorders, totalsales, chart} 

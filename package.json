@@ -19,6 +19,7 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "dateformat": "^3.0.3",
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "express-jwt": "^6.0.0",

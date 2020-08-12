@@ -9,4 +9,7 @@ router.route('/api/orders')
 router.route('/api/orders/total')
     .get(orderControl.salesTotal)
 
+router.route('/api/orders/chart')
+    .get(orderControl.chart)
+
 module.exports = router
