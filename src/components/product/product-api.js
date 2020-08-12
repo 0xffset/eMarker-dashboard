@@ -1,4 +1,4 @@
-const  create = async(product) => {
+const  Create = async(product) => {
 	try {
 		let res = await fetch('/api/products', {
 			method: 'POST',
@@ -64,8 +64,8 @@ const getProductBefore = async(id) => {
     }
 }
 
-module.exports = {
-	create,
+export  {
+	Create,
 	productlist,
 	getProductBefore,
 	update

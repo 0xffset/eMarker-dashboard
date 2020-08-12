@@ -23,7 +23,7 @@ import PanelLeft from '../../pages/Drawer.js';
 import { useSnackbar } from 'notistack';
 
 
-import {create} from './product-api.js'
+import {Create} from './product-api.js'
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
@@ -146,7 +146,7 @@ const clickSubmit = () => {
     values.depth && productData.append('depth', values.depth)
     values.weight && productData.append('weight', values.weight)
 
-    create(productData)
+    Create(productData)
       .then((data) => {
           if (data.error) {
             Message(data.error, "error")
