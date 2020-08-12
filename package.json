@@ -1,5 +1,5 @@
 {
-  "name": "emarker-management-system",
+  "name": "eMarker-dashboard",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -50,7 +50,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm install && npm run server && npm run start --only=dev --no-shrinkwrap && npm run build"
   },
   "proxy": "http://localhost:3001/",
   "eslintConfig": {
