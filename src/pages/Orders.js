@@ -47,7 +47,7 @@ export default function Orders() {
         </TableHead>
         <TableBody>
           {orders.map((order) => (
-            <TableRow key={order._id}>
+            <TableRow key={order.id}>
               <TableCell><Moment format="LLL">{order.created_at}</Moment></TableCell>
               <TableCell>{order.customer_name}</TableCell>
               <TableCell>{order.customer_email}</TableCell>
