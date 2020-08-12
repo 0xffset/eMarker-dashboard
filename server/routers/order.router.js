@@ -6,4 +6,7 @@ const router = express.Router()
 router.route('/api/orders')
     .get(orderControl.list)
 
+router.route('/api/orders/total')
+    .get(orderControl.salesTotal)
+
 module.exports = router

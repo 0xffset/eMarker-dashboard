@@ -1,7 +1,35 @@
 const {Order} = require('./../models/order.model')
 const Product = require('./../models/product.model')
 const getErrorMessage = require('../helpers/dbErrorParser.js')
-
+const salesTotal = async(req, res) => {
+	try {
+			let orders = await Order.find().select("products")
+			let parseOrders = Object.values(orders)
+			let arrOrders = []
+			let total = 0
+			let ids = []
+			let count = 0
+			for (let i = 0; i < parseOrders.length; i++) {
+				for (product in parseOrders[i]['products']) {
+					let idClient = parseOrders[i]['_id']
+					let idProduct = parseOrders[i]['products'][product]['product']
+					let quantity = 	parseOrders[i]['products'][product]['quantity']
+					
+					let price = await Product.find({"_id" : idProduct}).select("price")
+					let amount = (price[0].price * quantity)
+					total = total + amount
+					
+				}
+				
+		 }
+        	return  res.json(total)
+	}
+	catch (err) {
+		return res.status(400).json({
+			error: getErrorMessage(err)
+		})
+	}
+}
 const list = async(req, res) => {
 	try {
 			let orders = await Order.find()
@@ -52,5 +80,6 @@ const list = async(req, res) => {
 
 
 module.exports = {
-	list
+	list,
+	salesTotal
 }
