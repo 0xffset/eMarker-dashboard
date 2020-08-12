@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const compress = require('compression') 
 const cors = require('cors') 
 const helmet = require('helmet') 
+
 //routers
 const authRouter = require('./routers/auth.router')
 const userRouter = require('./routers/user.router')
@@ -32,6 +33,15 @@ app.use('/', userRouter)
 app.use('/', productRouter)
 app.use('/', customerRouter)
 app.use('/', orderRouter)
+
+
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('../build'))
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.join('../build', 'index.html'))
+	})
+}
 
 
 
