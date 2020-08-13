@@ -1,0 +1,17 @@
+
+{
+  "version": 2,
+  "builds": [{ "src": "server.js", "use": "@now/node-server" }],
+  "routes": [
+    {
+      "src": "/auth/signin",
+      "dest": "/server.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/auth/signin",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    }
+  ]
+}
