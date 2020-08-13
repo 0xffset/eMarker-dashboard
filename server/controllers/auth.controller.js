@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const expressJWT = require('express-jwt')
-const config = require('./../../config/config')
+const config = require('../config/config')
 const crypto = require('crypto')
 const User = require('./../models/user.model');
 

@@ -1,6 +1,6 @@
 const  Create = async(product) => {
 	try {
-		let res = await fetch('/api/products', {
+		let res = await fetch('https://tranquil-peak-84007.herokuapp.com/api/products', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
@@ -16,7 +16,7 @@ const  Create = async(product) => {
 
 const  update = async(product, id) => {
 	try {
-		let res = await fetch('/api/products/'+id, {
+		let res = await fetch('https://tranquil-peak-84007.herokuapp.com/api/products/'+id, {
 			method: 'PUT',
 			headers: {
 				'Accept': 'application/json',
@@ -32,7 +32,7 @@ const  update = async(product, id) => {
 
 const productlist = async() => {
     try {
-        let response = await fetch('/api/products', {
+        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/products', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -49,7 +49,7 @@ const productlist = async() => {
 
 const getProductBefore = async(id) => {
     try {
-        let response = await fetch('/api/products/'+id, {
+        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/products/'+id, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

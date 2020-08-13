@@ -1,6 +1,6 @@
 const recentorders = async() => {
     try {
-        let response = await fetch('/api/orders/', {
+        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/orders/', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -16,7 +16,7 @@ const recentorders = async() => {
 }
 const totalsales = async() => {
     try {
-        let response = await fetch('/api/orders/total', {
+        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/orders/total', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

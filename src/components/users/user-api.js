@@ -1,6 +1,6 @@
 const userlist = async() => {
     try {
-        let response = await fetch('/api/users/', {
+        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/users/', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -17,7 +17,7 @@ const userlist = async() => {
 
 const remove = async(id) => {
     try {
-        let response = await fetch('/api/users/'+id, {
+        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/users/'+id, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -33,7 +33,7 @@ const remove = async(id) => {
 
 const update = async(id, user) => {
     try {
-        let response = await fetch('/api/users/'+id, {
+        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/users/'+id, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -50,7 +50,7 @@ const update = async(id, user) => {
 
 const create = async(user) => {
     try {
-        let response = await fetch('/api/users/', {
+        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/users/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
