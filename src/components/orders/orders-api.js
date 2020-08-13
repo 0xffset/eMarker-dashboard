@@ -33,7 +33,7 @@ const totalsales = async() => {
 
 const chart = async() => {
     try {
-        let response = await fetch('/api/orders/chart', {
+        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/orders/chart', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
