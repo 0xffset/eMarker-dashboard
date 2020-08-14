@@ -45,9 +45,10 @@
     "recharts": "^1.8.5"
   },
   "scripts": {
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm start\"",
+    "dev": "concurrently --kill-others-on-fail \"npm run client\" \"npm start\"",
     "server": "cd server && node server.js",
     "start": "node server/server.js",
+    "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
