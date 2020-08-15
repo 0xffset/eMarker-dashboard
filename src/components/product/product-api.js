@@ -1,11 +1,12 @@
 const API_KEY = process.env.REACT_APP_KEY_DEV
 
-const  Create = async(product) => {
+const  Create = async(product, credentials) => {
 	try {
 		let res = await fetch(`${API_KEY}/api/products`, {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
+				'access-token': credentials.t
 			},
 			body: product
 		})
@@ -16,12 +17,13 @@ const  Create = async(product) => {
 	}
 }
 
-const  update = async(product, id) => {
+const  update = async(product, id, credentials) => {
 	try {
 		let res = await fetch(`${API_KEY}/api/products/`+id, {
 			method: 'PUT',
 			headers: {
 				'Accept': 'application/json',
+				'access-token': credentials.t
 			},
 			body: product
 		})
@@ -32,13 +34,15 @@ const  update = async(product, id) => {
 	}
 }
 
-const productlist = async() => {
+const productlist = async(credentials, signal) => {
     try {
         let response = await fetch(`${API_KEY}/api/products`, {
             method: 'GET',
+            signal: signal,
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'access-token': credentials.t
             }
         })
         return await response.json()
@@ -49,13 +53,14 @@ const productlist = async() => {
     }
 }
 
-const getProductBefore = async(id) => {
+const getProductBefore = async(id, credentials) => {
     try {
         let response = await fetch(`${API_KEY}/api/products/`+id, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'access-token': credentials.t
             }
         })
         return await response.json()

@@ -12,7 +12,7 @@ import {
     IconButton
 } from '@material-ui/core'
 import arrBufferToBase64 from '../../components/helpers/buffeToBinary.js'
-
+import auth from '../../components/auth/auth-helper.js'
 const useStyles = makeStyles((theme) => ({
   margin: {
         margin: theme.spacing(1),
@@ -20,13 +20,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProductLists(props) {
-   
+    const jwt = auth.isAuthenticated()
     const [products, setProducts] = useState([]);
     
   useEffect(() => {
         const abortController = new AbortController()
         const signal = abortController.signal
-        productlist({},signal)
+        productlist({t: jwt.token}, signal)
             .then((res) => {
                 setProducts(res)
               })

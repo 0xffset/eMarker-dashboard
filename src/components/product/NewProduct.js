@@ -21,7 +21,7 @@ import MaskedInput from 'react-text-mask';
 import NumberFormat from 'react-number-format';
 import PanelLeft from '../../pages/Drawer.js';
 import { useSnackbar } from 'notistack';
-
+import auth from '../../components/auth/auth-helper.js'
 
 import {Create} from './product-api.js'
 const TabPanel = (props) => {
@@ -103,6 +103,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ActionProducts =()=> {
+  const jwt = auth.isAuthenticated()
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const { enqueueSnackbar } = useSnackbar();
@@ -146,7 +147,7 @@ const clickSubmit = () => {
     values.depth && productData.append('depth', values.depth)
     values.weight && productData.append('weight', values.weight)
 
-    Create(productData)
+    Create(productData, {t: jwt.token})
       .then((data) => {
           if (data.error) {
             Message(data.error, "error")

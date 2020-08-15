@@ -23,6 +23,7 @@ import PanelLeft from '../../pages/Drawer.js';
 import { useSnackbar } from 'notistack';
 import arrBufferToBase64 from '../helpers/buffeToBinary.js'
 import {update} from './product-api'
+import auth from '../../components/auth/auth-helper.js'
 
 
 import {getProductBefore} from './product-api.js'
@@ -105,6 +106,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UpdateProduct =(props)=> {
+  const jwt = auth.isAuthenticated()
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const { enqueueSnackbar } = useSnackbar();
@@ -125,7 +127,7 @@ const UpdateProduct =(props)=> {
   });
 
   useEffect(() => {
-  getProductBefore(props.match.params.id)
+  getProductBefore(props.match.params.id, {t: jwt.token})
     .then((res) => {
      
      setValues({
@@ -169,7 +171,7 @@ const clickSubmit = () => {
     values.depth && productData.append('depth', values.depth)
     values.weight && productData.append('weight', values.weight)
 
-    update(productData, props.match.params.id)
+    update(productData, props.match.params.id, {t: jwt.token})
       .then((data) => {
           if (data.error) {
             Message(data.error, "error")
