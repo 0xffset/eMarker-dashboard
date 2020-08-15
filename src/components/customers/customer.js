@@ -5,12 +5,8 @@ import auth from './../auth/auth-helper.js'
 import {
     TableBody,
     TableCell,
-    TableRow,
-    Chip,
-    
-
+    TableRow
 } from '@material-ui/core'
-
 
 export default function CustomersLists(props) {
    const [customers, setCustomers] = useState([]);
@@ -29,7 +25,7 @@ export default function CustomersLists(props) {
           <TableRow key={customer._id}>
           <TableCell>{customer.name}</TableCell>
             <TableCell>{customer.email}</TableCell>
-            <TableCell><Moment format="yyyy/MM/DD">{customer.created}</Moment></TableCell>
+            <TableCell><Moment format="LLL">{customer.created}</Moment></TableCell>
           </TableRow>
         ))}
       </TableBody>

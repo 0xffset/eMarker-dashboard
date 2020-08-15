@@ -10,7 +10,7 @@ import Title from './Title';
 import Moment from 'react-moment'
 
 import {recentorders} from '../components/orders/orders-api.js'
-
+import auth from '../components/auth/auth-helper.js'
 
 function preventDefault(event) {
   event.preventDefault();
@@ -23,9 +23,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Orders() {
+  const jwt = auth.isAuthenticated()
   const [orders, setOrders] = useState([])
+  const abortController = new AbortController()
+  const signal = abortController.signal
   useEffect(() => {
-    recentorders()
+    recentorders({t: jwt.token}, signal)
       .then((res) => {
         setOrders(res)
       })

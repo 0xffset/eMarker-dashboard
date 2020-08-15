@@ -3,11 +3,12 @@ import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
 import {chart} from '../components/orders/orders-api.js'
-
+import auth from '../components/auth/auth-helper'
 export default function Chart() {
   const  [data, setData] = useState()
+  const jwt = auth.isAuthenticated()
   useEffect(() => {
-    chart()
+    chart({t: jwt.token})
       .then((res) => {
         setData(res)
       })

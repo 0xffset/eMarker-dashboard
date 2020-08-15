@@ -1,15 +1,16 @@
 const express = require('express')
 const orderControl = require('./../controllers/order.controller')
+const authControl = require('./../controllers/auth.controller')
 
 const router = express.Router()
 
 router.route('/api/orders')
-    .get(orderControl.list)
+    .get(authControl.requiredAuthentication, orderControl.list)
 
 router.route('/api/orders/total')
-    .get(orderControl.salesTotal)
+    .get(authControl.requiredAuthentication,orderControl.salesTotal)
 
 router.route('/api/orders/chart')
-    .get(orderControl.chart)
+    .get(authControl.requiredAuthentication, orderControl.chart)
 
 module.exports = router

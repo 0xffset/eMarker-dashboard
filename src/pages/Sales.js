@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Title from './Title';
 import {totalsales} from '../components/orders/orders-api.js'
 import Moment from 'react-moment'
+import auth from '../components/auth/auth-helper'
 function preventDefault(event) {
   event.preventDefault();
 }
@@ -15,10 +16,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Deposits() {
+export default function Sales() {
   const [total, setTotal] = useState()
+  const jwt = auth.isAuthenticated()
   useEffect(() => {
-    totalsales()
+    totalsales({t: jwt.token})
       .then((res) => {
         setTotal(res)
       })
@@ -26,7 +28,7 @@ export default function Deposits() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Sales Today</Title>
+      <Title>Amount of Sales</Title>
       <Typography component="p" variant="h4">
         ${total}
       </Typography>
