@@ -21,6 +21,7 @@ import {
 } from "@material-ui/icons";
 import PersonIcon from '@material-ui/icons/Person';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import { mainListItems, secondaryListItems } from './listItems';
 
 
@@ -155,6 +156,9 @@ export default function PanelLeft(props) {
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
               {props.name}
             </Typography>
+              <IconButton color="inherit" href="https://github.com/RolEYder/eMarker-dashboard">
+            <GitHubIcon/>
+            </IconButton>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
@@ -165,6 +169,7 @@ export default function PanelLeft(props) {
                 <MailOutlineIcon />
               </Badge>
             </IconButton>
+
             <IconButton color="inherit">
               <Badge  color="secondary">
                 <PersonIcon />
