@@ -1,6 +1,9 @@
+const API_KEY = process.env.REACT_APP_KEY_DEV
+
+
 const signin = async (user) => {
     try {
-        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/auth/signin/', {
+        let response = await fetch(`${API_KEY}/auth/signin/`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -19,7 +22,7 @@ const signin = async (user) => {
 
 const signout = async () => {
     try {
-        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/auth/signout', {method: 'GET'})
+        let response = await fetch(`${API_KEY}/auth/signout`, {method: 'GET'})
         return await response.json()
     }
     catch(err) {

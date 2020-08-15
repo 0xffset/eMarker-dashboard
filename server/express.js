@@ -12,10 +12,11 @@ const userRouter = require('./routers/user.router')
 const productRouter = require('./routers/product.router')
 const customerRouter = require('./routers/customer.router')
 const orderRouter = require('./routers/order.router')
+const config = require('./config/config.js')
 const app = express()
 
-//comment out before building for production
-
+// JWT
+app.set('jwt', config.jwtSecret)
 // parse body params and attache them to req.body
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true }))
@@ -28,6 +29,7 @@ app.use(cors({
 	origin: true,
 	credentials: true,
 }));
+
 //routers
 app.use('/', authRouter)
 app.use('/', userRouter)

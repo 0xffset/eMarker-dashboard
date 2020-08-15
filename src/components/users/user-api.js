@@ -1,10 +1,14 @@
-const userlist = async() => {
+const API_KEY = process.env.REACT_APP_KEY_DEV
+
+const userlist = async(credentials, signal) => {
     try {
-        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/users/', {
+        let response = await fetch(`${API_KEY}/api/users/`, {
             method: 'GET',
+            signal: signal,
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'access-token': credentials.t
             }
         })
         return await response.json()
@@ -15,13 +19,14 @@ const userlist = async() => {
     }
 }
 
-const remove = async(id) => {
+const remove = async(id, credentials) => {
     try {
-        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/users/'+id, {
+        let response = await fetch(`${API_KEY}/api/users/`+id, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'access-token': credentials.t
             }
         })
         return await response.json()
@@ -31,13 +36,14 @@ const remove = async(id) => {
     }
 }
 
-const update = async(id, user) => {
+const update = async(id, user, credentials) => {
     try {
-        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/users/'+id, {
+        let response = await fetch(`${API_KEY}/api/users/`+id, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'access-token': credentials.t
             },
             body: JSON.stringify(user)
         })
@@ -48,13 +54,14 @@ const update = async(id, user) => {
     }
 }
 
-const create = async(user) => {
+const create = async(user, credentials) => {
     try {
-        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/users/', {
+        let response = await fetch(`${API_KEY}/api/users/`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'access-token': credentials.t
             },
             body: JSON.stringify(user)
 

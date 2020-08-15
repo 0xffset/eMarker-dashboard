@@ -11,7 +11,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Grid from '@material-ui/core/Grid';
 import {TextField,  IconButton} from '@material-ui/core'
 import {update} from './user-api.js'
-
+import auth from '../auth/auth-helper.js'
 const useStyles = makeStyles((theme) => ({
 	margin: {
         margin: theme.spacing(1),
@@ -25,10 +25,8 @@ const useStyles = makeStyles((theme) => ({
 }));
  const UpdateUser = (props) => {
 	const [open, setOpen] = useState(false)
-
-
-	
-	const handleCloseDialog = () => {
+  const jwt = auth.isAuthenticated()
+  const handleCloseDialog = () => {
 		setOpen(false)
 	}
 	const handleOpenDialog = () => {
@@ -90,7 +88,7 @@ if (type === "success") {
       type_user: values.type_user || undefined,
       status: values.status || undefined
     }
-    update(props.id, user)
+    update(props.id, user, {t: jwt.token})
       .then((data) => {
         if(data.error)
         {

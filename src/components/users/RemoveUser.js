@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { useSnackbar } from 'notistack';
 import {remove} from './user-api.js'
-
+import auth from '../auth/auth-helper.js'
 import {
  
     IconButton
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
  const RemoveUser = (props) => {
 	const [open, setOpen] = useState(false)
-
+  const jwt = auth.isAuthenticated()
 	const { enqueueSnackbar } = useSnackbar();
 
 	
@@ -59,7 +59,7 @@ if (type === "success") {
    
 
 	const clickDelete = () => {
-		remove(props.id)
+		remove(props.id, {t: jwt.token})
 			.then((data) => {
 				if (data.error)
 				{

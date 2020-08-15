@@ -11,15 +11,16 @@ import {
 } from '@material-ui/core'
 import RemoveUser from '../../components/users/RemoveUser'
 import UpdateUser from '../../components/users/UpdateUser'
-
+import auth from '../auth/auth-helper.js'
 export default function UserLists(props) {
    
     const [users, setUsers] = useState([]);
+    const jwt = auth.isAuthenticated()
     
   useEffect(() => {
         const abortController = new AbortController()
         const signal = abortController.signal
-        userlist({},signal)
+        userlist({t: jwt.token}, signal)
             .then((res) => {
                 setUsers(res)
             })

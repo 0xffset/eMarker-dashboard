@@ -29,7 +29,7 @@ const signin = async(req, res) => {
             })
         return res.json({
                 token,
-                user: {_id: user._id, name: user.name, email: user.email, seller: user.seller}
+                user: {_id: user._id, name: user.name, email: user.email, typeUser: user.type_user}
             })
      
     }
@@ -51,11 +51,25 @@ const signout = (req, res) => {
     })
 }
 
-const requiredSign = expressJWT({
-    secret: config.jwtSecret,
-    algorithms: ['HS256'],
-    userProperty: 'auth'
-})
+const requiredAuthentication = (req, res, next) => {
+    const token = req.headers['access-token']
+    if (token) {
+        jwt.verify(token, config.jwtSecret, (err, decoded) => {
+            if (err) {
+                return res.status('401').json({
+                    error: "Token invalid!"
+                })
+            } else {
+                req.decoded = decoded
+                next()
+            }
+        })
+    } else {
+        res.status('401').json({
+            error: "UnauthorizedError. "
+        })
+    }
+}
 
 const hasAuthorization = (req, res, next) => {
     const authorized = req.profile  && req.profile._id 
@@ -72,6 +86,6 @@ module.exports = {
     signin,
     signout,
     hasAuthorization,
-    requiredSign
+    requiredAuthentication
 
 }

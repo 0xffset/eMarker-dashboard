@@ -23,8 +23,7 @@ import Title from './Title';
 
 //Userlist 
 import UserLists from '../components/users/user'
-// Generate Order Data
-
+import auth from '../components/auth/auth-helper.js'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -61,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
  
 
 export default function UserList() {
+//token
+const jwt = auth.isAuthenticated()
+
  //States to add new user dialog
   const [open, setOpen] = useState(false)
  // Types of user
@@ -117,7 +119,7 @@ if (type === "success") {
 }
    
     
-    create(user)
+    create(user, {t: jwt.token})
       .then((data) => {
         if (data.error) {
 

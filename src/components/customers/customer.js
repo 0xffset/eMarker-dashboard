@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Moment from 'react-moment'
 import { customerlist } from './customer-api'
+import auth from './../auth/auth-helper.js'
 import {
     TableBody,
     TableCell,
@@ -13,14 +14,15 @@ import {
 
 export default function CustomersLists(props) {
    const [customers, setCustomers] = useState([]);
+   const jwt = auth.isAuthenticated()
    useEffect(() => {
         const abortController = new AbortController()
         const signal = abortController.signal
-        customerlist({},signal)
+        customerlist({t: jwt.token}, signal)
             .then((res) => {
                 setCustomers(res)
             })
-    });
+    }, []);
     return (
         <TableBody>
         {customers.map((customer) => (

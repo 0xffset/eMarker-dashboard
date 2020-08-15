@@ -1,6 +1,9 @@
+const API_KEY = process.env.REACT_APP_KEY_DEV
+
+
 const recentorders = async() => {
     try {
-        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/orders/', {
+        let response = await fetch(`${API_KEY}/api/orders/`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -16,7 +19,7 @@ const recentorders = async() => {
 }
 const totalsales = async() => {
     try {
-        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/orders/total', {
+        let response = await fetch(`${API_KEY}/api/orders/total`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -33,7 +36,7 @@ const totalsales = async() => {
 
 const chart = async() => {
     try {
-        let response = await fetch('https://tranquil-peak-84007.herokuapp.com/api/orders/chart', {
+        let response = await fetch(`${API_KEY}/api/orders/chart`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

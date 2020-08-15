@@ -47,7 +47,7 @@
   "scripts": {
     "dev": "concurrently --kill-others-on-fail \"npm run client\" \"npm start\"",
     "server": "cd server && node server.js",
-    "start": "node server/server.js",
+    "start": "nodemon server/server.js",
     "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
