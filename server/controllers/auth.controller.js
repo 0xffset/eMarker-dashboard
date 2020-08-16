@@ -31,7 +31,7 @@ const signin = async(req, res) => {
                 token,
                 user: {_id: user._id, name: user.name, email: user.email, typeUser: user.type_user}
             })
-     
+
     }
 
     catch(err) {
@@ -72,7 +72,7 @@ const requiredAuthentication = (req, res, next) => {
 }
 
 const hasAuthorization = (req, res, next) => {
-    const authorized = req.profile  && req.profile._id 
+    const authorized = req.profile  && req.profile._id
     if(!(authorized)) {
         return res.status('403').json({
             error: "User is not authorized"

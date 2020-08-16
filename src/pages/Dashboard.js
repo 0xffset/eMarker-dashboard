@@ -1,4 +1,5 @@
-import React from 'react';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import React, {useState, useEffect}from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -11,6 +12,30 @@ import Chart from './Chart';
 import Sales from './Sales';
 import Orders from './Orders';
 import PanelLeft from './Drawer';
+import Switch from "@material-ui/core/Switch";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import Badge from '@material-ui/core/Badge';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+
+} from "@material-ui/core";
+import {Redirect} from 'react-router-dom'
+import {
+  Menu as MenuIcon,
+  NotificationsNone as NotificationsIcon,
+
+} from "@material-ui/icons";
+import PersonIcon from '@material-ui/icons/Person';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { mainListItems, secondaryListItems } from './listItems';
+import auth from '../components/auth/auth-helper'
 
 
 function Copyright() {
@@ -131,18 +156,46 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
+  let [darkState, setDarkState] = useState(false);
+  let theme = window.localStorage.getItem("theme")
+  let palletType = darkState ? "light" : "dark";
+  const handleThemeChange = () => {
+    window.localStorage.setItem("theme", palletType)
+    setDarkState(!darkState)
+    window.location.reload(false)
+  }
+const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+ useEffect(() => {
+   if (theme === "dark") {
+       setDarkState(!darkState)
+   }
+   if (theme === "light") {
+     setDarkState(darkState)
+   }
 
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
+ }, [])
   return (
     <>
+    <ThemeProvider>
+
     <div className={classes.root}>
-   
-      
+
+
       <PanelLeft name="Dashboard"/>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
+              <FormControlLabel
+            control={
+              <Switch
+                checked={darkState}
+                onChange={handleThemeChange}
+                name="theme"
+                color="primary"
+              />
+            }
+            label="Dark mode"
+          />
           <Grid container spacing={3}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
@@ -169,6 +222,7 @@ export default function Dashboard() {
         </Container>
       </main>
     </div>
+    </ThemeProvider>
     </>
   );
 }

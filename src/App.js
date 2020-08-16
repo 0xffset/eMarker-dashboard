@@ -1,8 +1,16 @@
+import {createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import React from 'react'
 import MainRouter from './MainRouter'
 import {BrowserRouter} from 'react-router-dom'
-import { ThemeProvider } from '@material-ui/styles'
 import { hot } from 'react-hot-loader'
+
+let getTheme = window.localStorage.getItem("theme")
+let theme =  getTheme ? getTheme : "light"
+let darkTheme = createMuiTheme({
+  palette: {
+    type: theme
+   }
+});
 
 const App = () => {
   React.useEffect(() => {
@@ -10,10 +18,10 @@ const App = () => {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles)
     }
-  }, [])
+  })
   return (
   <BrowserRouter>
-      <ThemeProvider>
+      <ThemeProvider theme={darkTheme}>
         <MainRouter/>
       </ThemeProvider>
   </BrowserRouter>
