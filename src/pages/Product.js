@@ -7,12 +7,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 import PanelLeft from './Drawer';
 import Title from './Title';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
-
-//Userlist 
+//Userlist
 import ProductLists from '../components/product/product'
 // Generate Order Data
 
@@ -39,7 +39,12 @@ const useStyles = makeStyles((theme) => ({
   filename:{
     marginLeft:'10px'
   },
-
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+  },
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
@@ -49,16 +54,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- 
+
 
 export default function Product() {
 
 const classes = useStyles();
 
   return (
-    
+
     <div className={classes.root}>
-   
+
     <PanelLeft name="Products"/>
     <main className={classes.content}>
     <div className={classes.appBarSpacer} />
@@ -69,29 +74,32 @@ const classes = useStyles();
         alignItems="flex-end">
      <Link to="/product/new" ><Button  variant="contained" color="primary">Add new product</Button></Link>
     </Grid>
-    <Title>List of Products</Title>
-      <Table>
+
+    <Grid item xs={12}>
+      <Paper className={classes.paper}>
+      <Title>List of Products</Title>
+       <Table>
         <TableHead >
           <TableRow >
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Actions</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>  </TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Name</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Category</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Price</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Quantity</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}} >Status</TableCell>
+            <TableCell  style={{fontWeight: 'bold'}}>Actions</TableCell>
+            <TableCell  style={{fontWeight: 'bold'}}>  </TableCell>
+            <TableCell  style={{fontWeight: 'bold'}}>Name</TableCell>
+            <TableCell  style={{fontWeight: 'bold'}}>Category</TableCell>
+            <TableCell  style={{fontWeight: 'bold'}}>Price</TableCell>
+            <TableCell  style={{fontWeight: 'bold'}}>Quantity</TableCell>
+            <TableCell  style={{fontWeight: 'bold'}} >Status</TableCell>
           </TableRow>
         </TableHead>
-       
-        <ProductLists/>
-       
-      </Table>
-    
+       <ProductLists/>
+       </Table>
+     </Paper>
+    </Grid>
       </Container>
     </main>
 
 
+
     </div>
-    
+
     );
 }

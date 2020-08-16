@@ -20,8 +20,9 @@ import {
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import PanelLeft from './Drawer';
 import Title from './Title';
+import Paper from '@material-ui/core/Paper';
 
-//Userlist 
+//Userlist
 import UserLists from '../components/users/user'
 import auth from '../components/auth/auth-helper.js'
 
@@ -29,6 +30,12 @@ import auth from '../components/auth/auth-helper.js'
 const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
+  },
+  paper: {
+    padding: theme.spacing(3),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -57,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- 
+
 
 export default function UserList() {
 //token
@@ -69,7 +76,7 @@ const jwt = auth.isAuthenticated()
   const options = ["admin", "seller", "manager"]
   // Values of Autocompleme
   const [value, setValue] = useState(options[0])
-  // Values to save it. 
+  // Values to save it.
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -82,7 +89,7 @@ const jwt = auth.isAuthenticated()
  const { enqueueSnackbar } = useSnackbar();
 
 
-  // function to handler event changes to save it. 
+  // function to handler event changes to save it.
   const handleChange = name => event => {
      const value = name === 'image' ? event.target.files[0] : event.target.value
      setValues({...values, [name]: value})
@@ -117,8 +124,8 @@ if (type === "success") {
 });
 }
 }
-   
-    
+
+
     create(user, {t: jwt.token})
       .then((data) => {
         if (data.error) {
@@ -127,15 +134,15 @@ if (type === "success") {
           setOpen(true)
           Message(data.error, "error")
         } else {
-    
+
           Message(data.message, "success")
            setOpen(false)
            setValues({...values, error: '', redirect: true})
         }
-      }) 
+      })
 
 }
-  
+
   const [inputValue, setInputValue] = useState('')
   // Open Add new user dialog
   const handleClickAddNewUser = () => {
@@ -149,9 +156,9 @@ if (type === "success") {
   const classes = useStyles();
 
   return (
-    
+
     <div className={classes.root}>
-   
+
     <PanelLeft name="Users"/>
     <main className={classes.content}>
     <div className={classes.appBarSpacer} />
@@ -162,23 +169,27 @@ if (type === "success") {
   alignItems="flex-end">
      <Button onClick={() => handleClickAddNewUser()}  variant="contained" color="primary">Add new user</Button>
     </Grid>
+    <Grid item xs={12}>
+      <Paper className={classes.paper}>
     <Title>List of users</Title>
       <Table>
         <TableHead >
           <TableRow >
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Actions</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Name</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Email</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Date Created</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Type user</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}} >Status</TableCell>
+            <TableCell  style={{ fontWeight: 'bold'}}>Actions</TableCell>
+            <TableCell  style={{ fontWeight: 'bold'}}>Name</TableCell>
+            <TableCell  style={{ fontWeight: 'bold'}}>Email</TableCell>
+            <TableCell  style={{ fontWeight: 'bold'}}>Date Created</TableCell>
+            <TableCell  style={{ fontWeight: 'bold'}}>Type user</TableCell>
+            <TableCell  style={{ fontWeight: 'bold'}} >Status</TableCell>
           </TableRow>
         </TableHead>
-       
+
         <UserLists/>
-       
+
       </Table>
-    
+    </Paper>
+    </Grid>
+
       </Container>
     </main>
  {/* Start - Dialog - Add new User*/}
@@ -195,8 +206,8 @@ if (type === "success") {
   justify="left"
   alignItems="center"
 >
-            <TextField onChange={handleChange('name')}  id="name" type="text" label="Name"  className={classes.textField} variant="outlined"  margin="normal" styles={{width: '300px'}} required/> 
-            <TextField onChange={handleChange('email')} id="email" type="text" label="Email"  className={classes.textField} variant="outlined"  margin="normal" required/> 
+            <TextField onChange={handleChange('name')}  id="name" type="text" label="Name"  className={classes.textField} variant="outlined"  margin="normal" styles={{width: '300px'}} required/>
+            <TextField onChange={handleChange('email')} id="email" type="text" label="Email"  className={classes.textField} variant="outlined"  margin="normal" required/>
            </Grid>
            <Grid
             container
@@ -204,17 +215,17 @@ if (type === "success") {
             justify="center"
             alignItems="center"
            >
-            <TextField onChange={handleChange('password')} id="password" type="password" label="Password"  className={classes.textField} variant="outlined"  margin="normal" required/> 
+            <TextField onChange={handleChange('password')} id="password" type="password" label="Password"  className={classes.textField} variant="outlined"  margin="normal" required/>
            <Autocomplete
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
-        
+
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
-          setValues({...values, ['type_user']: newInputValue})  
+          setValues({...values, ['type_user']: newInputValue})
 
         }}
         id="controllable-states-demo"
@@ -224,7 +235,7 @@ if (type === "success") {
       />
       </Grid>
 
-   
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog} color="primary">
@@ -238,6 +249,6 @@ if (type === "success") {
  {/* End - Dialog - Add new User*/}
 
     </div>
-    
+
     );
 }

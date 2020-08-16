@@ -3,13 +3,28 @@ import React from 'react'
 import MainRouter from './MainRouter'
 import {BrowserRouter} from 'react-router-dom'
 import { hot } from 'react-hot-loader'
-
+import {
+  orange,
+  lightBlue,
+  deepPurple,
+  deepOrange,
+  teal
+} from "@material-ui/core/colors";
 let getTheme = window.localStorage.getItem("theme")
 let theme =  getTheme ? getTheme : "light"
+let PrimaryPalette = getTheme === "light" ? teal[900] : "#232323"
+let SecondaryPalette = getTheme === "light" ? deepOrange[500] : deepOrange[500]
 let darkTheme = createMuiTheme({
   palette: {
-    type: theme
-   }
+    type: theme,
+    primary: {
+      main: PrimaryPalette
+    },
+    seconday: {
+      main: SecondaryPalette
+    }
+  },
+
 });
 
 const App = () => {

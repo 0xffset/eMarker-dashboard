@@ -8,7 +8,8 @@ import Container from '@material-ui/core/Container';
 import PanelLeft from './Drawer';
 import Title from './Title';
 import CustomersLists from '../components/customers/customer'
-
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
   },
      textField: {
         marginLeft: theme.spacing(1),
@@ -42,38 +49,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- 
+
 
 export default function Customer() {
 
-  
+
 
   const classes = useStyles();
 
   return (
-    
+
     <div className={classes.root}>
-   
+
     <PanelLeft name="Users"/>
     <main className={classes.content}>
     <div className={classes.appBarSpacer} />
     <Container maxWidth="lg" className={classes.container}>
-  
+
+    <Grid item xs={12}>
+      <Paper className={classes.paper}>
     <Title>List of customers</Title>
       <Table>
         <TableHead >
           <TableRow >
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Name</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Email</TableCell>
-            <TableCell  style={{color: 'black', fontWeight: 'bold'}}>Date Created</TableCell>
+            <TableCell  style={{ fontWeight: 'bold'}}>Name</TableCell>
+            <TableCell  style={{ fontWeight: 'bold'}}>Email</TableCell>
+            <TableCell  style={{ fontWeight: 'bold'}}>Date Created</TableCell>
           </TableRow>
         </TableHead>
           <CustomersLists/>
         </Table>
+      </Paper>
+    </Grid>
       </Container>
     </main>
- 
+
     </div>
-    
+
     );
 }

@@ -8,7 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 import Moment from 'react-moment'
-
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import {recentorders} from '../components/orders/orders-api.js'
 import auth from '../components/auth/auth-helper.js'
 

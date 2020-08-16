@@ -10,11 +10,11 @@ import LayersIcon from '@material-ui/icons/Layers';
 import SettingsIcon from '@material-ui/icons/Settings';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import {Link} from 'react-router-dom';
-
+let theme = window.localStorage.getItem("theme")
 export const mainListItems = (
-  
+
   <div>
-    <Link to="/dashboard" style={{textDecoration: 'none', color: 'black'}}>
+    <Link to="/dashboard" style={{textDecoration: 'none', color: theme === "dark" ? 'white' : 'black'}}>
     <ListItem button>
       <ListItemIcon>
         <LayersIcon />
@@ -28,7 +28,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Orders" />
     </ListItem>
-   <Link to='/customers' style={{textDecoration: 'none', color: 'black'}}>
+   <Link to='/customers' style={{textDecoration: 'none', color: theme === "dark" ? 'white' : 'black'}}>
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
@@ -36,7 +36,7 @@ export const mainListItems = (
       <ListItemText primary="Customers" />
     </ListItem>
    </Link>
-   <Link to="/product" style={{textDecoration: 'none', color: 'black'}}>
+   <Link to="/product" style={{textDecoration: 'none', color: theme === "dark" ? 'white' : 'black'}}>
     <ListItem button>
       <ListItemIcon>
         <FastfoodIcon />
@@ -50,23 +50,23 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Reports" />
     </ListItem>
- 
+
   </div>
 );
 
 export const secondaryListItems = (
   <div>
     <ListSubheader inset>Settings</ListSubheader>
-    
-    <Link to="/users" style={{textDecoration: 'none', color: 'black'}}>
-    <ListItem button>
+
+    <Link to="/users" style={{textDecoration: 'none',color: theme === "dark" ? 'white' : 'black'}}>
+    <ListItem button href="/users">
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Users" />
     </ListItem>
     </Link>
-    
+
     <ListItem button>
       <ListItemIcon>
         <SettingsIcon />
