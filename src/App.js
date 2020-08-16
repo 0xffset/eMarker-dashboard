@@ -4,9 +4,6 @@ import MainRouter from './MainRouter'
 import {BrowserRouter} from 'react-router-dom'
 import { hot } from 'react-hot-loader'
 import {
-  orange,
-  lightBlue,
-  deepPurple,
   deepOrange,
   teal
 } from "@material-ui/core/colors";

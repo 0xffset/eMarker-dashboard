@@ -1,4 +1,4 @@
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import {  ThemeProvider } from "@material-ui/core/styles";
 import React, {useState, useEffect}from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,29 +13,7 @@ import Sales from './Sales';
 import Orders from './Orders';
 import PanelLeft from './Drawer';
 import Switch from "@material-ui/core/Switch";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import Badge from '@material-ui/core/Badge';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-
-} from "@material-ui/core";
-import {Redirect} from 'react-router-dom'
-import {
-  Menu as MenuIcon,
-  NotificationsNone as NotificationsIcon,
-
-} from "@material-ui/icons";
-import PersonIcon from '@material-ui/icons/Person';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import GitHubIcon from '@material-ui/icons/GitHub';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { mainListItems, secondaryListItems } from './listItems';
-import auth from '../components/auth/auth-helper'
 
 
 function Copyright() {
